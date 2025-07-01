@@ -1,11 +1,25 @@
 export async function sendOrderToSupplier(orderData: any): Promise<any> {
-  // TODO: Replace with real supplier API endpoint and credentials
-  // Example placeholder logic:
-  // const response = await fetch('https://supplier.example.com/api/orders', {
-  //   method: 'POST',
-  //   headers: { 'Content-Type': 'application/json', 'Authorization': 'Bearer YOUR_API_KEY' },
-  //   body: JSON.stringify(orderData),
-  // });
-  // return await response.json();
-  return { message: "Order sent to supplier (placeholder)", orderData };
+  // Test Supplier API endpoint
+  const url = "https://jsi.kitchen365test.com/index.php/rest/V1/jsimiddleware";
+
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Add authentication headers here if needed, e.g. 'Authorization': 'Bearer ...'
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Supplier API error: ${response.status} ${errorText}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    // Log or handle error as needed
+    throw error;
+  }
 } 
