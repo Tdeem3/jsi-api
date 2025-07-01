@@ -1,6 +1,6 @@
 export async function sendOrderToSupplier(orderData: any): Promise<any> {
   // Test Supplier API endpoint
-  const url = "https://jsi.kitchen365test.com/index.php/rest/V1/jsimiddleware";
+  const url = "https://jsi.kitchen365test.com/index.php/rest/V1/jsimiddleware/pushorder";
 
   try {
     const response = await fetch(url, {
