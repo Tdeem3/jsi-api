@@ -3,11 +3,12 @@
 client_id = "aef4d582a9b846433b324f8d9b739500"
 name = "JSI API"
 handle = "jsi-api"
-application_url = "https://example.com/"
+application_url = "https://les-rows-direct-diana.trycloudflare.com"
 embedded = true
 
 [build]
 include_config_on_deploy = true
+automatically_update_urls_on_dev = true
 
 [webhooks]
 api_version = "2025-04"
@@ -25,7 +26,11 @@ api_version = "2025-04"
 scopes = "write_products"
 
 [auth]
-redirect_urls = [ "https://example.com/api/auth" ]
+redirect_urls = [
+  "https://les-rows-direct-diana.trycloudflare.com/auth/callback",
+  "https://les-rows-direct-diana.trycloudflare.com/auth/shopify/callback",
+  "https://les-rows-direct-diana.trycloudflare.com/api/auth/callback"
+]
 
 [pos]
 embedded = false
