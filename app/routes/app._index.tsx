@@ -94,6 +94,7 @@ export const action = async ({ request }: ActionFunctionArgs) => {
 const TEST_ORDER = {
   po_name: "PO Name",
   shipping_type: "pickup",
+  ship_pickup_date: "2025-03-08T00:00:00",
   warehouse_code: 1,
   additional_details: {
     shipping_notes: "test",
@@ -193,7 +194,7 @@ export default function AppIndex() {
   const generateProduct = () => fetcher.submit({}, { method: "POST" });
 
   return (
-    <Page title="Send Test Order to Supplier">
+    <Page title="Send Test Order to JSI">
       <BlockStack gap="500">
         <Card>
           <BlockStack gap="400">
