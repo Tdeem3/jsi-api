@@ -3,7 +3,7 @@
 client_id = "aef4d582a9b846433b324f8d9b739500"
 name = "JSI API"
 handle = "jsi-api"
-application_url = "https://les-rows-direct-diana.trycloudflare.com"
+application_url = "https://digest-manga-intention-plug.trycloudflare.com"
 embedded = true
 
 [build]
@@ -27,9 +27,9 @@ scopes = "write_products"
 
 [auth]
 redirect_urls = [
-  "https://les-rows-direct-diana.trycloudflare.com/auth/callback",
-  "https://les-rows-direct-diana.trycloudflare.com/auth/shopify/callback",
-  "https://les-rows-direct-diana.trycloudflare.com/api/auth/callback"
+  "https://digest-manga-intention-plug.trycloudflare.com/auth/callback",
+  "https://digest-manga-intention-plug.trycloudflare.com/auth/shopify/callback",
+  "https://digest-manga-intention-plug.trycloudflare.com/api/auth/callback"
 ]
 
 [pos]

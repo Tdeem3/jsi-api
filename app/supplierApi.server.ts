@@ -1,7 +1,10 @@
 export async function sendOrderToSupplier(orderData: any): Promise<any> {
   // Test Supplier API endpoint
   const url = "https://jsi.kitchen365test.com/index.php/rest/V1/jsimiddleware/pushorder";
-  const AUTH_TOKEN = "eyJraWQiOiIxIiwiYWxnIjoiSFMyNTYifQ.eyJ1aWQiOjM1MDIsInV0eXBpZCI6MywiaWF0IjoxNzUxNDY1NTAwLCJleHAiOjIwNjcwNDE1MDB9.0a-atU8JS5M0MVQFRgJ9JVQ5gaPIAcv-mJu93-ahm5E";
+  const AUTH_TOKEN = process.env.SUPPLIER_API_TOKEN;
+  if (!AUTH_TOKEN) {
+    throw new Error("Supplier API token is not set in environment variables.");
+  }
 
   try {
     const response = await fetch(url, {
@@ -13,12 +16,18 @@ export async function sendOrderToSupplier(orderData: any): Promise<any> {
       body: JSON.stringify(orderData),
     });
 
+    const contentType = response.headers.get("content-type");
+    const rawText = await response.text();
+
     if (!response.ok) {
-      const errorText = await response.text();
-      throw new Error(`Supplier API error: ${response.status} ${errorText}`);
+      throw new Error(`Supplier API error: ${response.status} ${rawText}`);
     }
 
-    return await response.json();
+    if (!contentType || !contentType.includes("application/json")) {
+      throw new Error(`Expected JSON, got: ${rawText}`);
+    }
+
+    return JSON.parse(rawText);
   } catch (error) {
     // Log or handle error as needed
     throw error;

@@ -166,7 +166,18 @@ export default function AppIndex() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(TEST_ORDER),
       });
-      const data = await res.json();
+      const contentType = res.headers.get("content-type");
+      const rawText = await res.text();
+
+      if (!res.ok) {
+        throw new Error(`Supplier API error: ${res.status} ${rawText}`);
+      }
+
+      if (!contentType || !contentType.includes("application/json")) {
+        throw new Error(`Expected JSON, got: ${rawText}`);
+      }
+
+      const data = JSON.parse(rawText);
       setResponse(data);
     } catch (err: any) {
       setError(err.message || "Unknown error");
